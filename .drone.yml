@@ -1,0 +1,65 @@
+workspace:
+  base: /test
+  path: platform
+
+matrix:
+  PLATFORM_PROFILE:
+    - standard
+    - communities
+
+services:
+  # centos 6 + httpd + php${FPFIS_PHP_VERSION}
+
+pipeline:
+
+  # Step name "prepare"
+  prepare:
+    # Use php${FPFIS_PHP_VERSION} image
+    image: fpfis/php56-dev
+    # Run the following commands
+    volumes:
+      - /cache/composer:/root/.composer/cache
+      - /cache/drush:/root/.drush/cache
+    commands:
+      - cat /proc/{cpu,mem}info|sort|uniq -c|egrep -i "name|memtotal"
+      - php --version
+      - composer install --ansi
+
+
+  build-dist:
+    image: fpfis/php56-dev
+    commands:
+      - ./bin/phing build-multisite-dist -Dcomposer.bin=$(which composer)
+      - mkdir multisite_drupal_${PLATFORM_PROFILE}
+      - echo ${DRONE_COMMIT_SHA} >  multisite_drupal_${PLATFORM_PROFILE}/.commit
+      - rsync -aL build/profiles/multisite_drupal_${PLATFORM_PROFILE}/ multisite_drupal_${PLATFORM_PROFILE}/
+
+  deploy-platform-communities:
+    image: fpfis/drone-plugin-git-deploy
+    source: multisite_drupal_communities
+    target_folder: deployed
+    secrets:
+      - source: communities_deploy_key
+        target: deploy_key
+      - source: communities_target_repo
+        target: target_repo
+    clean: false
+    message: Deployed ${DRONE_COMMIT_SHA} from ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}@${DRONE_BRANCH} by ${DRONE_COMMIT_AUTHOR}
+    when:
+      matrix:
+        PLATFORM_PROFILE: communities
+
+  deploy-platform-standard:
+    image: fpfis/drone-plugin-git-deploy
+    source: multisite_drupal_standard
+    target_folder: deployed
+    secrets:
+      - source: standard_deploy_key
+        target: deploy_key
+      - source: standard_target_repo
+        target: target_repo
+    clean: false
+    message: Deployed ${DRONE_COMMIT_SHA} from ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}@${DRONE_BRANCH} by ${DRONE_COMMIT_AUTHOR}
+    when:
+      matrix:
+        PLATFORM_PROFILE: standard
