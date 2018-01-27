@@ -29,10 +29,10 @@ pipeline:
   build-dist:
     image: fpfis/php56-dev
     commands:
-      - ./bin/phing build-multisite-dist -Dcomposer.bin=$(which composer)
+      - composer install --working-dir=profiles/multisite_drupal_${PROFILE_NAME}
       - mkdir multisite_drupal_${PLATFORM_PROFILE}
       - echo ${DRONE_COMMIT_SHA} >  multisite_drupal_${PLATFORM_PROFILE}/.commit
-      - rsync -aL build/profiles/multisite_drupal_${PLATFORM_PROFILE}/ multisite_drupal_${PLATFORM_PROFILE}/
+      - rsync -aL profiles/multisite_drupal_${PLATFORM_PROFILE}/ multisite_drupal_${PLATFORM_PROFILE}/
 
   deploy-platform-communities:
     image: fpfis/drone-plugin-git-deploy
