@@ -43,11 +43,13 @@ pipeline:
         target: deploy_key
       - source: communities_target_repo
         target: target_repo
-    clean: false
+    target_branch: ${DRONE_BRANCH}
+    clean: true
     message: Deployed ${DRONE_COMMIT_SHA} from ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}@${DRONE_BRANCH} by ${DRONE_COMMIT_AUTHOR}
     when:
       matrix:
         PLATFORM_PROFILE: communities
+      event: push
 
   deploy-platform-standard:
     image: fpfis/drone-plugin-git-deploy
@@ -58,8 +60,10 @@ pipeline:
         target: deploy_key
       - source: standard_target_repo
         target: target_repo
-    clean: false
+    target_branch: ${DRONE_BRANCH}
+    clean: true
     message: Deployed ${DRONE_COMMIT_SHA} from ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}@${DRONE_BRANCH} by ${DRONE_COMMIT_AUTHOR}
     when:
       matrix:
         PLATFORM_PROFILE: standard
+      event: push
