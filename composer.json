@@ -14,7 +14,7 @@
   "require-dev": {
     "drupal/phingdrushtask": "^1.1",
     "drupol/phingbehattask": "^1.0",
-    "drush/drush": "8.0.5",
+    "drush/drush": "8.1.15",
     "ec-europa/drush-m2c": "dev-master",
     "ec-europa/multisite_drupal_standard": "*",
     "ec-europa/multisite_drupal_communities": "*",
@@ -104,6 +104,7 @@
     "installer-paths": {
       "build/": ["type:drupal-core"],
       "build/profiles/{$name}/": ["type:drupal-profile"],
+      "vendor/drush/drush/commands/{$name}": ["type:drupal-drush"],
       "vendor/{$vendor}/{$name}/": [
         "drupal/phingdrushtask",
         "release/multisite_drupal_standard",
