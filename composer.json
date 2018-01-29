@@ -21,8 +21,6 @@
     "ec-europa/oe-task-runner": "dev-master",
     "ec-europa/qa-automation": "^3.0",
     "lesstif/php-jira-rest-client": "^1.8.0",
-    "release/multisite_drupal_standard": "*",
-    "release/multisite_drupal_communities": "*",
     "pear/versioncontrol_git": "dev-master",
     "pfrenssen/phpcs-pre-push": "1.0",
     "phing/phing": "~2",
