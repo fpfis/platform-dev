@@ -24,15 +24,14 @@ pipeline:
       - cat /proc/{cpu,mem}info|sort|uniq -c|egrep -i "name|memtotal"
       - php --version
       - composer install --ansi
-
+      - composer install --ansi --working-dir=profiles/multisite_drupal_${PLATFORM_PROFILE}
 
   build-dist:
     image: fpfis/php56-dev
     commands:
-      - ./bin/phing build-multisite-dist -Dcomposer.bin=$(which composer)
       - mkdir multisite_drupal_${PLATFORM_PROFILE}
       - echo ${DRONE_COMMIT_SHA} >  multisite_drupal_${PLATFORM_PROFILE}/.commit
-      - rsync -aL build/profiles/multisite_drupal_${PLATFORM_PROFILE}/ multisite_drupal_${PLATFORM_PROFILE}/
+      - rsync -aL profiles/multisite_drupal_${PLATFORM_PROFILE}/ multisite_drupal_${PLATFORM_PROFILE}/
 
   deploy-platform-communities:
     image: fpfis/drone-plugin-git-deploy
