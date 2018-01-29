@@ -1,0 +1,1 @@
+../../resources/multisite_drupal_communities.make
