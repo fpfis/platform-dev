@@ -15,7 +15,7 @@
     "drupal/phingdrushtask": "^1.1",
     "drupol/phingbehattask": "^1.0",
     "drush/drush": "8.1.15",
-    "ec-europa/drush-m2c": "dev-master",
+    "ec-europa/drush-m2c": "dev-fixes",
     "ec-europa/multisite_drupal_standard": "*",
     "ec-europa/multisite_drupal_communities": "*",
     "ec-europa/oe-task-runner": "dev-master",
