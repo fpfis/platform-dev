@@ -1,5 +1,5 @@
 {
-    "name": "ec-europa/multisite_drupal_standard",
+    "name": "fpfis/multisite_drupal_standard",
     "type": "drupal-profile",
     "version": "1.0.0",
     "require": {
