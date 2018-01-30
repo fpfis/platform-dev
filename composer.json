@@ -16,8 +16,6 @@
     "drupol/phingbehattask": "^1.0",
     "drush/drush": "8.1.15",
     "ec-europa/drush-m2c": "dev-fixes",
-    "ec-europa/multisite_drupal_standard": "*",
-    "ec-europa/multisite_drupal_communities": "*",
     "ec-europa/oe-task-runner": "dev-master",
     "ec-europa/qa-automation": "^3.0",
     "lesstif/php-jira-rest-client": "^1.8.0",
@@ -39,14 +37,6 @@
       "url": "https://packages.drupal.org/7"
     },
     {
-      "type": "path",
-      "url": "profiles/multisite_drupal_standard"
-    },
-    {
-      "type": "path",
-      "url": "profiles/multisite_drupal_communities"
-    },
-    {
       "type": "vcs",
       "url": "https://git.drupal.org/project/phingdrushtask.git"
     },
@@ -58,30 +48,6 @@
         "type": "git-hook",
         "source": {
           "url": "https://gist.github.com/498fc52fea3f965f6640.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "release/multisite_drupal_standard",
-        "version": "1.0",
-        "source": {
-          "url": "git@github.com:verbruggenalex/multisite_drupal_standard.git",
-          "type": "git",
-          "reference": "master"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "release/multisite_drupal_communities",
-        "version": "1.0",
-        "source": {
-          "url": "git@github.com:verbruggenalex/multisite_drupal_communities.git",
           "type": "git",
           "reference": "master"
         }
@@ -103,12 +69,9 @@
   "extra": {
     "installer-paths": {
       "build/": ["type:drupal-core"],
-      "build/profiles/{$name}/": ["type:drupal-profile"],
       "vendor/drush/drush/commands/{$name}": ["type:drupal-drush"],
       "vendor/{$vendor}/{$name}/": [
-        "drupal/phingdrushtask",
-        "release/multisite_drupal_standard",
-        "release/multisite_drupal_communities"
+        "drupal/phingdrushtask"
       ]
     }
   }
