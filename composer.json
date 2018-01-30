@@ -9,13 +9,13 @@
     "php": ">=5.4.0",
     "ext-json": "*",
     "ext-phar": "*",
-    "ext-xml": "*"
+    "ext-xml": "*",
+    "fpfis/drush-m2c": "dev-master"
   },
   "require-dev": {
     "drupal/phingdrushtask": "^1.1",
     "drupol/phingbehattask": "^1.0",
     "drush/drush": "8.1.15",
-    "ec-europa/drush-m2c": "dev-fixes",
     "ec-europa/oe-task-runner": "dev-master",
     "ec-europa/qa-automation": "^3.0",
     "lesstif/php-jira-rest-client": "^1.8.0",
@@ -25,7 +25,7 @@
     "knplabs/github-api": "^2.7",
     "php-http/guzzle6-adapter": "^1.1"
   },
-  "prefer-stable": true,
+  "prefer-stable": false,
   "autoload": {
     "psr-4": {
       "NextEuropa\\": "src"
