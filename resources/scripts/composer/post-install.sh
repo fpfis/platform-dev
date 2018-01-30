@@ -18,6 +18,7 @@ for profile in multisite_drupal_standard multisite_drupal_communities; do
     $profile.make \
     composer.json \
     --require-dev \
-    --custom=modules/custom,modules/features
+    --custom=modules/custom,modules/features \
+    --name=ec-europa/${profile}
   cd ../..
 done
