@@ -1,0 +1,32 @@
+workspace:
+  base: /test
+  path: platform
+
+
+services:
+  web:
+    image: fpfis/httpd-php-dev:7.1
+    environment:
+      - DOCUMENT_ROOT=/test/platform/build
+  mysql:
+    image: percona/percona-server:5.6
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
+pipeline:
+
+  prepare-php:
+    image: fpfis/httpd-php-dev:7.1
+    commands:
+      - composer install --ansi
+
+  package:
+    image: fpfis/httpd-php-dev:7.1
+    commands:
+      - ./bin/phing build-multisite-dist -Dcomposer.bin=$(which composer)
+
+  build-docker:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: fpfis/pt
+    tags: latest
