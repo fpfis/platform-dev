@@ -19,18 +19,7 @@ ENV DRUPAL_USERNAME admin
 ENV DRUPAL_PASSWORD Ch4ng3meSenSe1
 ENV DRUPAL_NAME    "Configure me Sensei"
 ENV MULTISITE_PROFILE "multisite_drupal_standard"
-ENTRYPOINT [
-  "/platform/vendor/bin/drush",
-  "--account-mail=\"${DRUPAL_EMAIL}\"",
-  "--account-name=\"${DRUPAL_USERNAME}\"",
-  "--account-pass=\"\"${DRUPAL_PASSWORD}}",
-  "--db-url=\"mysql://${MYSQL_USERNAME}:${MYSQL_PASSOWRD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}\"",
-  "--root=\"/var/www/html\"",
-  "--site-name=\"${DRUPAL_NAME}\"",
-  "--yes",
-  "site-install",
-  "${MULTISITE_PROFILE}"
-]
+ENTRYPOINT [ "/platform/vendor/bin/drush", "--account-mail=\"${DRUPAL_EMAIL}\"", "--account-name=\"${DRUPAL_USERNAME}\"", "--account-pass=\"\"${DRUPAL_PASSWORD}}", "--db-url=\"mysql://${MYSQL_USERNAME}:${MYSQL_PASSOWRD}@${MYSQL_HOST}:3306/${MYSQL_DATABASE}\"", "--root=\"/var/www/html\"", "--site-name=\"${DRUPAL_NAME}\"", "--yes", "site-install", "${MULTISITE_PROFILE}" ]
 
 # That should be the ... web nodes
 FROM fpfis/httpd-php:production-7.1 as webnode
