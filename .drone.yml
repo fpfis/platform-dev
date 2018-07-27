@@ -25,17 +25,23 @@ pipeline:
     commands:
       - ./bin/phing build-multisite-dist -Dcomposer.bin=$(which composer)
 
-  build-docker-base:
-    image: plugins/docker
-    secrets: [ docker_username, docker_password ]
-    repo: fpfis/pt
-    target: build
-    tags: build-latest
-
-
   build-docker-web:
     image: plugins/docker
     secrets: [ docker_username, docker_password ]
     repo: fpfis/pt
     target: webnode
     tags: latest
+    tags: latest-installer
+
+  build-docker-worker:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: fpfis/pt
+    target: worker
+    tags: latest-worker
+
+  build-docker-installer:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: fpfis/pt
+    target: installer
